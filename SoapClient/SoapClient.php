@@ -30,11 +30,7 @@ class SoapClient extends \SoapClient
          * Colissimo returns headers and boundary parts
          */
         $response = parent::__doRequest($this->lastRequest = $request, $location, $action, $version, $oneWay);
-        /**
-         * So we only keep the XML envelope
-         */
-        $response = substr($response, strpos($response, '<soap:Envelope '), strrpos($response, '</soap:Envelope>') - strpos($response, '<soap:Envelope ') + strlen('</soap:Envelope>'));
-        return '<?xml version="1.0" encoding="UTF-8"?>' . trim($response);
+        return $response;
     }
     /**
      * Override it in order to return the final XML Request
